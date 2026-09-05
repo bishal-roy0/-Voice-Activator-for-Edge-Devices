@@ -1,0 +1,46 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials/
+
+# Python and server tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# ESP32 and IDE build output
+.pio/
+build/
+sdkconfig
+sdkconfig.old
+.vscode/
+
+# Node/dashboard dependencies and output
+node_modules/
+dist/
+coverage/
+
+# Audio datasets, recordings, and generated model artifacts
+data/raw/
+data/processed/
+recordings/
+*.wav
+*.mp3
+*.flac
+*.tflite
+*.h5
+*.keras
+*.onnx
+*.bin
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+*.swp

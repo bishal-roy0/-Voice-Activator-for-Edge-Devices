@@ -1,0 +1,39 @@
+name: Repository quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - dev
+      - member1-tinyml
+      - member2-esp32
+      - member3-server
+      - member4-integration
+
+permissions:
+  contents: read
+
+jobs:
+  markdown-and-links:
+    name: Markdown and links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DavidAnson/markdownlint-cli2-action@v19
+        with:
+          globs: "**/*.md"
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --exclude-mail README.md CONTRIBUTING.md SECURITY.md docs .github
+
+  secret-scan:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
